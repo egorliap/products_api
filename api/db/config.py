@@ -11,6 +11,10 @@ class Settings(BaseSettings):
     DB_USER: str
     DB_PASS: str
     DB_NAME: str
+    @property
+    def DATABASE_URL_syncpg(self)->str:
+        """Создает URL для синхронного подключения к БД проекта из данных в .env"""        
+        return f"postgresql://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
 
     @property
     def DATABASE_URL_asyncpg(self)->str:
